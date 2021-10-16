@@ -7,10 +7,11 @@ const Tasks = (props) => {
 		<>
 			{
 				props.tasks.map((task) => 
-					<Task key={task.id} task={task} id={task.id} ondel={props.ondel}/>
-
+					<Task key={task.id} task={task} id={task.id} ondel={props.ondel} ontog = {props.ontog}/>
 				)
+				
 			}
+			
 		</>
 	)
 }

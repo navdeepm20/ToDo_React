@@ -32,13 +32,20 @@ function App() {
 	])
   const deltask = (id) =>
   {
-    console.log('hello')
+   
     setTask(tasks.filter((task)=>(task.id!==id)))
   }
+  
+  const toggleTask = (id) =>
+  {
+	
+	setTask(tasks.map((task)=> task.id===id ? {...task, reminder: !task.reminder} : task))
+  }
+ 
   return (
       <div className="container">
         <Header />
-        <Tasks tasks={tasks} ondel={deltask}/>
+        {tasks.length > 0 ? <Tasks tasks={tasks} ondel={deltask} ontog={toggleTask}/> : "No Tasks to Show"}
       </div>
   );
 }
