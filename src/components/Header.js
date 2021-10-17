@@ -1,19 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from "./subcomponents/button"
-
+import { useState } from 'react'
 
 const Header = (props) => {
-	const b = 5
-	const btnclick = (e,b) =>
-	{
 	
-		console.log('hello')
-	}
 	return (
 		<header className="header">
 			<h1 >{props.title}</h1>
-			<Button onClick={()=>{btnclick(b)}}/>
+			<Button onClick={props.toggleAdd} color={props.showStatus ? 'red':'green'} text={props.showStatus ? 'Close':'Add'}/>
 		</header>
 	)
 }
