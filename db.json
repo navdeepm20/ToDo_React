@@ -15,7 +15,7 @@
     {
       "day": "test",
       "id": 4,
-      "reminder": true,
+      "reminder": false,
       "text": "test"
     },
     {

@@ -13,7 +13,7 @@ function App() {
    const getTask = async ()=>{
      const tasks = await fetchTask();
      setTask(tasks)
-     console.log('jasljfasdjfasdjfaslkjdfaskdfjasjf')
+    
    }    
    getTask()
   },[])
@@ -34,10 +34,33 @@ function App() {
   }
  
   
-  const toggleTask = (id) =>
+  const toggleTask = async (id) =>
   {
-	
-	setTask(tasks.map((task)=> task.id===id ? {...task, reminder: !task.reminder} : task))
+    let task;
+   
+    
+    tasks.map(el => {
+      if(el.id===id)
+      {
+        
+        task = el;
+        return;
+      }
+    });
+    let uptask = {...task,reminder: !task.reminder}
+	  const res = await fetch(`http://localhost:5000/tasks/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        'Content-Type':"application/json"
+      },
+      body: JSON.stringify(uptask)
+    })
+    let json = await res.json()
+
+    
+    
+	  setTask(tasks.map((task)=> task.id===id ? {...task, reminder: !task.reminder} : task))
   }
   const addTask = async (ntask) =>
   {	  
@@ -67,7 +90,7 @@ function App() {
   return (
       <div className="container">
         <Header toggleAdd={()=>{btnclick(showStatus)}} showStatus={showStatus}/>
-		{showStatus && < Add onadd={addTask}/>}
+		    {showStatus && < Add onadd={addTask}/>}
         {tasks.length > 0 ? <Tasks tasks={tasks} ondel={deltask} ontog={toggleTask}/> : "No Tasks to Show"}
       </div>
   );
