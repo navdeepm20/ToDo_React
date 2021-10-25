@@ -14,7 +14,7 @@ const Header = (props) => {
 }
 
 Header.defaultProps = {
-	title: 'TaskLook',
+	title: 'Tidify',
   }
 
 Header.propTypes = {
