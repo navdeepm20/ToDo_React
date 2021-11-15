@@ -4,8 +4,15 @@ import Header from './components/Header'
 import Tasks from './components/Tasks'
 import Add from './components/Add'
 import {useState, useEffect} from 'react'
+import {ThemeProvider} from 'styled-components'
+import {lightTheme,darkTheme,GlobalStyles} from './theme'
+
 function App() {
-  
+  let [theme,setTheme]  = useState("light");
+
+  const themeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
   const [tasks,setTask] = useState([
 		
 	])
@@ -88,11 +95,15 @@ function App() {
 		
 	}
   return (
+    <ThemeProvider theme={theme==='light' ? lightTheme : darkTheme }>
+
       <div className="container">
+        <GlobalStyles/>
         <Header toggleAdd={()=>{btnclick(showStatus)}} showStatus={showStatus}/>
 		    {showStatus && < Add onadd={addTask}/>}
         {tasks.length > 0 ? <Tasks tasks={tasks} ondel={deltask} ontog={toggleTask}/> : "No Tasks to Show"}
       </div>
+    </ThemeProvider>
   );
 }
 
